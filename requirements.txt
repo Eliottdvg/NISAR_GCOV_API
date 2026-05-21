@@ -51,6 +51,7 @@ partd==1.4.2
 pathlist==0.1.1
 pexpect==4.9.0
 pillow==12.2.0
+pip_system_certs==5.3
 platformdirs==4.9.6
 pqdm==0.2.0
 prompt_toolkit==3.0.52
