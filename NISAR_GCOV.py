@@ -122,9 +122,9 @@ dataarrays_proj =  [da.rio.write_crs(f"EPSG:{da.isel(time=0).projection.item()}"
 
 bbox4326 = dict(minx=spatial_extent[0], miny=spatial_extent[1], maxx=spatial_extent[2], maxy=spatial_extent[3], crs=bbox_crs)
 da_subset = [da.rio.clip_box(**bbox4326) for da in dataarrays_proj]
-ts = xr.concat(da_subset, dim="time")
+ts: xr.DataArray = xr.concat(da_subset, dim="time")
 
 ####### Saving ##########
 print('Saving file...')
 os.makedirs(Save_path, exist_ok=True)
-ts.to_netcdf(os.path.join(Save_path, '_'.join(FILTERS) + '_' + temp_extent[0] + '.cdf'), auto_complex=True)
+ts.to_netcdf(os.path.join(Save_path, '_'.join(FILTERS) + '_' + temp_extent[0] + '.cdf'))
