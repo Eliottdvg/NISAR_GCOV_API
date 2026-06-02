@@ -13,6 +13,6 @@ FILTERS: ["048_D", "QPDH"] # Filters you want to apply to the data search (relat
 # polarisation: QPDH, DHDH
 
 product: 'NISAR_L2_GCOV_BETA_V1' # Product you want, see doc
-group_path: "/science/LSAR/GCOV/grids/frequencyA" # Path to a product in the datatree, frequancyA has quadpol, B as Dual pol
+group_path: "/science/LSAR/GCOV/grids/frequencyB" # Path to a product in the datatree, frequancyA has quadpol, B as Dual pol
 R_BOI: ['HHHH', 'HVHV', 'mask', 'numberOfLooks', 'rtcGammaToSigmaFactor']
 

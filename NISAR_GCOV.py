@@ -11,11 +11,18 @@ from urllib.parse import urlparse
 from datetime import datetime
 from pathlib import PurePosixPath
 
+import argparse
+
 # requires pip-system-certs
 auth = earthaccess.login(persist=True) # authentication 
 
 ########## Parametres ##########
-with open("/home/desvignese/NISAR/NISAR_GCOV_API/Config.yaml") as stream:
+parser = argparse.ArgumentParser()
+parser.add_argument("--config_path", required=True, type=str, help="Enter path to yaml config file")
+args = parser.parse_args()
+config_path = args.config_path
+
+with open(config_path) as stream:
     try:
         file = yaml.safe_load(stream)
     except yaml.YAMLError as exc:
@@ -86,7 +93,6 @@ datatrees = [xr.open_datatree(
 for f in files]
 
 ############ Preprocessing ###############
-
 NISAR_TS_RE = re.compile(r"_(\d{8}T\d{6})_")
 
 def nisar_start_time_from_url(url: str) -> datetime:
