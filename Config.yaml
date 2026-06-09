@@ -8,11 +8,12 @@ Zones:
 
 temp_extent: 2025-07-15, 2026-05-31 # min date, max date
 
-FILTERS: ["048_D_074", 'QPDH'] # Filters you want to apply to the data search (relative orbit number, A or D (ascending or Descending)... see documentation) 
+FILTERS: ['098_A_015', 'DHDH'] # Filters you want to apply to the data search (relative orbit number, A or D (ascending or Descending)... see documentation) 
 # relative orbits: 048_D, 120_D...
 # polarisation: QPDH, DHDH
+# "048_D_074", 'QPDH'   '098_A_015', 'DHDH'
 
 product: 'NISAR_L2_GCOV_BETA_V1' # Product you want, see doc
-group_path: "/science/LSAR/GCOV/grids/frequencyB" # Path to a product in the datatree, frequancyA has quadpol, B as Dual pol
+group_path: "/science/LSAR/GCOV/grids/frequencyA" # Path to a product in the datatree, frequancyA has quadpol, B as Dual pol
 R_BOI: ['HHHH', 'HVHV', 'VVVV', 'VHVH', 'mask', 'rtcGammaToSigmaFactor']
 

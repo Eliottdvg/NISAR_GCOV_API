@@ -70,7 +70,7 @@ results = [results[id] for id in mask]
 names = [result["meta"]['native-id'] for result in results]
 
 print(len(results), 'files found') 
-# print([r['meta']['native-id'] for r in results]) # Printing the name of the files 
+print([r['meta']['native-id'] for r in results]) # Printing the name of the files 
 
 # Configuration connection
 fsspec_config = {
@@ -114,10 +114,10 @@ datasets = [
 
 ########### Projection #########
 R_BOI = list(set(R_BOI) & set(datasets[0].var()))
-print(f'Saving bands {R_BOI}')
+print(f'Saving bands {R_BOI}\n')
 
 dataarrays = [
-    ds[R_BOI].to_dataarray(dim="band").assign_coords({'projection' : ds.projection, 'listOfProducts' : str([r['meta']['native-id'] for r in results])})
+    ds[R_BOI].to_dataarray(dim="band").assign_coords({'projection' : ds.projection})
     for ds in datasets
 ]
 
@@ -126,6 +126,11 @@ dataarrays_proj =  [da.rio.write_crs(f"EPSG:{da.isel(time=0).projection.item()}"
 bbox4326 = dict(minx=spatial_extent[0], miny=spatial_extent[1], maxx=spatial_extent[2], maxy=spatial_extent[3], crs=bbox_crs)
 da_subset = [da.rio.clip_box(**bbox4326) for da in dataarrays_proj]
 ts: xr.DataArray = xr.concat(da_subset, dim="time")
+
+ts = ts.rename('Raster').to_dataset()
+ts['Raster'].attrs = ({'listOfProducts': str([r['meta']['native-id'] for r in results])})
+
+print(ts)
 
 ####### Saving ##########
 print('Saving file...')
