@@ -2,17 +2,17 @@ AOI: 'Tsho Rolpa'
 
 Zones: 
   Mera: 86.80148, 27.64484, 86.94120, 27.75825, EPSG:4326    # projection EPSG:4326
-  Hongku: 86.88907, 27.75010, 86.97939, 27.87286, EPSG:4326,
+  Hongku: 86.88907, 27.75010, 86.97939, 27.87286, EPSG:4326
   Tsho Rolpa : 86.4285, 27.7678, 86.6313, 27.9026, EPSG:4326
   # Area you want to crop and download, lon_min, lat_min, lon_max, lat_max, Projection
 
 temp_extent: 2025-07-15, 2026-05-31 # min date, max date
 
-FILTERS: ["098_A", "DHDH"] # Filters you want to apply to the data search (relative orbit number, A or D (ascending or Descending)... see documentation) 
+FILTERS: ["048_D_074", 'QPDH'] # Filters you want to apply to the data search (relative orbit number, A or D (ascending or Descending)... see documentation) 
 # relative orbits: 048_D, 120_D...
 # polarisation: QPDH, DHDH
 
 product: 'NISAR_L2_GCOV_BETA_V1' # Product you want, see doc
-group_path: "/science/LSAR/GCOV/grids/frequencyA" # Path to a product in the datatree, frequancyA has quadpol, B as Dual pol
-R_BOI: ['HHHH', 'HVHV', 'mask', 'numberOfLooks', 'rtcGammaToSigmaFactor']
+group_path: "/science/LSAR/GCOV/grids/frequencyB" # Path to a product in the datatree, frequancyA has quadpol, B as Dual pol
+R_BOI: ['HHHH', 'HVHV', 'VVVV', 'VHVH', 'mask', 'rtcGammaToSigmaFactor']
 

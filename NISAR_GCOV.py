@@ -40,13 +40,13 @@ Save_path = f'./Data/NISAR_GCOV/{AOI}/{group_path.split('/')[-1]}'
 Zones = Zones[AOI].split(', ')
 spatial_extent = (float(Zones[0]), float(Zones[1]), float(Zones[2]), float(Zones[3]))
 bbox_crs = Zones[-1]
-print(bbox_crs, spatial_extent)
 
-proceed = input(f'Processing Area {AOI}\n '
-                f'temporal extent : {temp_extent}\n '
-                f'Filters: {FILTERS}\n '
-                f'product: {product}, {group_path}\n '
-                f'Bands : {R_BOI}\n '
+proceed = input(f'Processing Area {AOI}\n    '
+                f'{bbox_crs, spatial_extent}\n    '
+                f'temporal extent : {temp_extent}\n    '
+                f'Filters: {FILTERS}\n    '
+                f'product: {product}, {group_path}\n    '
+                f'Bands : {R_BOI}\n    '
                 f'Save path : {Save_path}\n'
                 'Proceed ? (Y/n)\n')
 
@@ -113,8 +113,11 @@ datasets = [
 ]
 
 ########### Projection #########
+R_BOI = list(set(R_BOI) & set(datasets[0].var()))
+print(f'Saving bands {R_BOI}')
+
 dataarrays = [
-    ds[R_BOI].to_dataarray(dim="band").assign_coords(projection = ds.projection)
+    ds[R_BOI].to_dataarray(dim="band").assign_coords({'projection' : ds.projection, 'listOfProducts' : str([r['meta']['native-id'] for r in results])})
     for ds in datasets
 ]
 
@@ -127,4 +130,4 @@ ts: xr.DataArray = xr.concat(da_subset, dim="time")
 ####### Saving ##########
 print('Saving file...')
 os.makedirs(Save_path, exist_ok=True)
-ts.to_netcdf(os.path.join(Save_path, '_'.join(FILTERS) + '_' + temp_extent[0] + '.cdf'))
+ts.to_netcdf(os.path.join(Save_path, '_'.join(FILTERS) + '.cdf'))
